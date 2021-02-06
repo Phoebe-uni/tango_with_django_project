@@ -1,7 +1,11 @@
 from django.contrib import admin
 from rango.models import Category, Page
 
-admin.site.register(Category)
+# Add in this class to customise the Admin Interface
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('name',)}
+
+admin.site.register(Category, CategoryAdmin)
 
 
 class PageAdmin(admin.ModelAdmin):
@@ -9,3 +13,4 @@ class PageAdmin(admin.ModelAdmin):
                     'category', 'url')
 
 admin.site.register(Page, PageAdmin)
+
